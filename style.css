@@ -43,16 +43,17 @@ body {
 img{
     object-fit: cover;
     overflow: hidden;
-    flex: 0 0 auto;
     border-radius: 16px;
     transform: scale(1);
+    
 
 }
 .card img{
     object-fit: cover;
+    object-position: center;
     overflow: hidden;
-    flex: 0 0 auto;
     height: 100%;
+    width: 100%;
     border-radius: 0px;
     transform: scale(1);
     transition: border-radius 0.5s ease;
@@ -103,6 +104,10 @@ img{
     border-radius: 32px;
 }
 
+.rowDial > img{
+    flex: 0 0 auto;
+}
+
 
 .columnContainer{
     display: flex;
@@ -122,6 +127,8 @@ img{
     gap: 10px;
     height: 100%;
 }
+
+
 
 #mainTitle{
     display: flex;
@@ -250,3 +257,6 @@ button:active{
 }
 
 
+* {
+    border-style: dotted;
+}
