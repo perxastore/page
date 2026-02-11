@@ -33,8 +33,9 @@ body {
     width: 350px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     flex: 0 0 auto;
-    justify-content: flex-end;
+    
     overflow: hidden;
     background-color: #fbfefb;
     
@@ -189,10 +190,20 @@ img{
     border-radius: 16px;
 }
 
+
+
 #itemDescription{
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
 }
+#itemDescription > h1{
+    font-size: 64px;
+}
+#itemDescription > h3{
+    font-size: 48px;
+}
+
+
 
 .categoryTitle{
     cursor: pointer;
@@ -234,25 +245,32 @@ button:active{
 .foot{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: right;
+    align-items:flex-start;
     overflow: hidden;
     color: #bcb8b1;
     background-color: black;
     padding: 64px;
     
 }
-.foot h1, h2, h3, h4, h5{
+.foot > h1, h2, h3, h4, h5, li{
+    text-align: left;
     flex: 0 0 auto;
     margin: 8px;
     padding: 0px;
+    font-size: 36px;
+}
+.foot > h2{
+    font-size: 48px;
+}
+.foot > h1{
     font-size: 64px;
 }
 .foot img{
     flex: 0 0 auto;
     object-fit: cover;
     overflow: hidden;
-    height: 256px;
+    height: 180px;
     border-radius: 0px;
 }
 

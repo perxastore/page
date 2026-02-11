@@ -32,20 +32,19 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const oversizeDiv = document.getElementById("oversizeRow");
+        const essentialsDiv = document.getElementById("essentialsRow");
         const q1 = query(
             collection(db, "items"),
-            where("category", "==", "Oversize"),
-            limit(3)
+            where("category", "==", "Esenciales"),
+            limit(4)
         );
 
         onSnapshot(q1, (snapshot) => {
-            oversizeDiv.innerHTML = "";
             snapshot.forEach(doc => {
                 const item = doc.data();
                 if (item.status != "Vendido"){
                     const img = item.images?.[0] || "";
-                    oversizeDiv.innerHTML += `
+                    essentialsDiv.innerHTML += `
                     <div class="card" onclick="window.location.href='./item.html?id=${doc.id}'">
                         <img src="${img}" loading="lazy">
                         <h2>Q${item.price}</h2>
@@ -60,7 +59,7 @@
         const q2 = query(
             collection(db, "items"),
             where("category", "==", "Deportivo"),
-            limit(3)
+            limit(4)
         );
 
         onSnapshot(q2, (snapshot) => {
@@ -70,6 +69,30 @@
                 if (item.status != "Vendido"){
                     const img = item.images?.[0] || "";
                     sportDiv.innerHTML += ` 
+                    <div class="card" onclick="window.location.href='./item.html?id=${doc.id}'">
+                        <img src="${img}" loading="lazy">    
+                        <h2>Q${item.price}</h2>
+                        <h2>Talla ${item.size}</h2>
+                    </div>`;
+                }
+            
+            });
+        });
+
+        const casualDiv = document.getElementById("casualRow");
+        const q3 = query(
+            collection(db, "items"),
+            where("category", "==", "Casual"),
+            limit(4)
+        );
+
+        onSnapshot(q3, (snapshot) => {
+            casualDiv.innerHTML = "";
+            snapshot.forEach(doc => {
+                const item = doc.data();
+                if (item.status != "Vendido"){
+                    const img = item.images?.[0] || "";
+                    casualDiv.innerHTML += ` 
                     <div class="card" onclick="window.location.href='./item.html?id=${doc.id}'">
                         <img src="${img}" loading="lazy">    
                         <h2>Q${item.price}</h2>
@@ -94,33 +117,89 @@
                 </div>
                 
             </div>
+             
             
             
-            
-
-            
-            <div class="categoryTitle" onclick="window.location.href='./category.html?category=Oversize'">
-                <h2>OVERSIZE ></h2>
+            <div class="categoryTitle">
+                <h2>Colecciones</h2>
             </div>
-            <div id = "oversizeRow" class="rowDial" style="height: 600px;">
+            <div class="categoryTitle" onclick="window.location.href='./search.html?category=Esenciales'">
+                <h2>Esenciales - Más ></h2>
+            </div>
+            <div id = "essentialsRow" class="rowDial" style="height: 600px;">
             </div>
             
-            <div class="categoryTitle" onclick="window.location.href='./category.html?category=Deportivo'">
-                <h2>Deportivo ></h2>
+            <div class="categoryTitle" onclick="window.location.href='./search.html?category=Deportivo'">
+                <h2>Deportivo - Más ></h2>
             </div>
             <div id = "sportRow" class="rowDial" style="height: 600px;">
             </div>
             
+            <div class="categoryTitle" onclick="window.location.href='./search.html?category=Casual'">
+                <h2>Casual - Más ></h2>
+            </div>
+            <div id = "casualRow" class="rowDial" style="height: 600px;">
+            </div>
+            
+            <div class="categoryTitle">
+                <h2>Tipos</h2>
+            </div>
+            <div class="rowDial" style="height: 80px;">
+                <div class="card" onclick="window.location.href='./search.html?type=Camisa'">
+                    <h1>Camisa</h1>
+                </div>
+                <div class="card" onclick="window.location.href='./search.html?type=Pantalon'">
+                    <h1>Pantalon</h1>
+                </div>
+                <div class="card" onclick="window.location.href='./search.html?type=Pants'">
+                    <h1>Pants</h1>
+                </div>
+                <div class="card" onclick="window.location.href='./search.html?type=Blusa'">
+                    <h1>Blusa</h1>
+                </div>
+            </div>
+
+            <div class="categoryTitle">
+                <h2>Colores</h2>
+            </div>
+            <div class="rowDial" style="height: 80px;">
+                <div class="card" onclick="window.location.href='./search.html?color=Negro'">
+                    <h1>Negro</h1>
+                </div>
+                <div class="card" onclick="window.location.href='./search.html?color=Gris'">
+                    <h1>Gris</h1>
+                </div>
+                <div class="card" onclick="window.location.href='./search.html?color=Blanco'">
+                    <h1>Blanco</h1>
+                </div>
+                <div class="card" onclick="window.location.href='./search.html?color=Verde'">
+                    <h1>Verde</h1>
+                </div>
+            </div>
+
+
+
+
             <div class="foot">
-                <h1>¿Por qué elegirnos?</h1>
-                <img src="./icons/list.png">
-                <h3>Prendas seleccionadas</h3>
-                <img src="./icons/price.png">
-                <h3>Precios accesibles</h3>
-                <img src="./icons/ruler.png">
-                <h3>Medidas exactas</h3>
-                <img src="./icons/flag.png">
-                <h3>Tienda 100% guatemalteca</h3>
+                <h1>Nuestra diferencia</h1>
+                <h3>Prendas cuidadosamente seleccionadas por estilo y estado.</h3>
+                <h3>Piezas únicas.</h3>
+                <h3>Transparencia real.</h3>
+                <h3>Medidas claras y condición detallada.</h3>
+                <br>
+                <h1>Entregas</h1>
+                <h2>> Escuintla</h2>
+                <h3>Trabajamos con un sistema de puntos de entrega diarios para mantener eficiencia y precios accesibles.</h3>
+                <h3>Centro Comercial Interplaza Escuintla - 1:00 PM</h3>
+                <h3>Centro Comercial El Minuto Escuintla - 3:00 PM</h3>
+                <h3>Centro Comercial Pradera Escuintla - 6:00 PM</h3>
+                <h2>> Toda Guatemala</h2>
+                <h3>Envios a traves de Forza con recargo de Q30.00</h3>
+                <h3>Pagas al recibir</h3>
+                <br>
+                <h1>Compra Segura</h1>
+                <h3>Al ser piezas únicas, recomendamos revisar medidas antes de confirmar.</h3>
+                <h3>Si tienes dudas, podemos asesorarte por WhatsApp.</h3>
             </div>
         </div>
 
