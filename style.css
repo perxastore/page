@@ -29,7 +29,7 @@ body {
 
 .card {
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 32px;
     width: 350px;
     display: flex;
     flex-direction: column;
@@ -256,7 +256,3 @@ button:active{
     border-radius: 0px;
 }
 
-
-* {
-    border-style: dotted;
-}

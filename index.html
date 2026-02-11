@@ -56,24 +56,24 @@
         });
 
 
-        const regularDiv = document.getElementById("regularRow");
+        const sportDiv = document.getElementById("sportRow");
         const q2 = query(
             collection(db, "items"),
-            where("category", "==", "Regular"),
+            where("category", "==", "Deportivo"),
             limit(3)
         );
 
         onSnapshot(q2, (snapshot) => {
-            regularDiv.innerHTML = "";
+            sportDiv.innerHTML = "";
             snapshot.forEach(doc => {
                 const item = doc.data();
                 if (item.status != "Vendido"){
                     const img = item.images?.[0] || "";
-                    regularDiv.innerHTML += ` 
+                    sportDiv.innerHTML += ` 
                     <div class="card" onclick="window.location.href='./item.html?id=${doc.id}'">
                         <img src="${img}" loading="lazy">    
                         <h2>Q${item.price}</h2>
-                        <h2>Talla ${item.size}</h2>    
+                        <h2>Talla ${item.size}</h2>
                     </div>`;
                 }
             
@@ -84,13 +84,13 @@
     </script>
     
     <div class="background"></div>
-
+    
     <div id="mainCard">
         <div class="columnContainer" >
             <div class="homeBanner">
                 <div class="columnCOntainer">
                     <h1>Perxa</h1>   
-                    <h3>Menos buscar. Mejor vestir.</h3>    
+                    <h3>Mejor vestir en un solo lugar</h3>    
                 </div>
                 
             </div>
@@ -105,10 +105,10 @@
             <div id = "oversizeRow" class="rowDial" style="height: 600px;">
             </div>
             
-            <div class="categoryTitle" onclick="window.location.href='./category.html?category=Regular'">
-                <h2>REGULAR ></h2>
+            <div class="categoryTitle" onclick="window.location.href='./category.html?category=Deportivo'">
+                <h2>Deportivo ></h2>
             </div>
-            <div id = "regularRow" class="rowDial" style="height: 600px;">
+            <div id = "sportRow" class="rowDial" style="height: 600px;">
             </div>
             
             <div class="foot">
