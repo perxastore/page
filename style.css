@@ -35,7 +35,6 @@ body {
     flex-direction: column;
     align-items: center;
     flex: 0 0 auto;
-    
     overflow: hidden;
     background-color: #fbfefb;
     
@@ -74,7 +73,7 @@ img{
 
 #mainCard{
     height: 1000px;
-    background-color:#fbfefb50;
+    background-color:#fbfefb99;
     
     
     border-radius: 32px;
@@ -256,6 +255,7 @@ button:active{
     color: #bcb8b1;
     background-color: black;
     padding: 64px;
+    border-radius: 32px;
     
 }
 .foot > h1, h2, h3, h4, h5, li{
