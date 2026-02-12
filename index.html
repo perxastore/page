@@ -32,6 +32,30 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+
+        const featuredDiv = document.getElementById("featuredRow");
+        const q0 = query(
+            collection(db, "items"),
+            where("featured", "==", true),
+            limit(4)
+        );
+
+        onSnapshot(q0, (snapshot) => {
+            snapshot.forEach(doc => {
+                const item = doc.data();
+                if (item.status != "Vendido"){
+                    const img = item.images?.[0] || "";
+                    featuredDiv.innerHTML += `
+                    <div class="card" onclick="window.location.href='./item.html?id=${doc.id}'">
+                        <img src="${img}" loading="lazy">
+                        <h2>Q${item.price}</h2>
+                        <h2>Talla ${item.size}</h2>    
+                    </div>`;
+                }
+            });
+        });
+
+
         const essentialsDiv = document.getElementById("essentialsRow");
         const q1 = query(
             collection(db, "items"),
@@ -118,7 +142,11 @@
                 
             </div>
              
-            
+            <div class="categoryTitle" onclick="window.location.href='./search.html?featured=true'">
+                <h2>Selección del dia ></h2>
+            </div>
+            <div id = "featuredRow" class="rowDial" style="height: 600px;">
+            </div>
             
             <div class="categoryTitle">
                 <h2>Colecciones</h2>
@@ -181,6 +209,9 @@
                 <div class="card" onclick="window.location.href='./search.html?color=Verde'">
                     <h1>Verde</h1>
                 </div>
+            </div>
+            <div class="card" onclick="window.location.href='./search.html'" style="width: 80%; margin: 16px; align-self: center;">
+                <h1>Todo</h1>
             </div>
 
 

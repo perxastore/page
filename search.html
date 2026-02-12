@@ -31,7 +31,7 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
+        
         const params = new URLSearchParams(window.location.search);
 
         const filters = {};
@@ -39,14 +39,23 @@
         params.forEach((value, key) => {
         filters[key] = value;
         });
-        
-        document.getElementById("title").textContent = params.values().next().value;
+
+
+        let pageTitle = params.values().next().value;
+        if (pageTitle == "true"){pageTitle = "Selección"}
+        if (!pageTitle) {pageTitle = "Todo"}
+
+        document.getElementById("title").textContent = pageTitle;
+
 
         const galleryDiv = document.getElementById("galleryContainer");
         let q = query(collection(db, "items"));
 
         Object.keys(filters).forEach((key) => {
-        q = query(q, where(key, "==", filters[key]));
+            if (key == "featured" && filters[key] == "true"){
+                filters[key] = true;
+            }
+            q = query(q, where(key, "==", filters[key]));
         });
 
         onSnapshot(q, (snapshot) => {
@@ -57,8 +66,11 @@
                     const img = item.images?.[0] || "";
                     galleryDiv.innerHTML += `
                     <div class="card" onclick="window.location.href='./item.html?id=${doc.id}'">
+                        <h5>${item.id}</h5>
                         <img src="${img}" loading="lazy">
+                        
                         <h2>Q${item.price}</h2>
+
                         <h2>Talla ${item.size}</h2>
                     </div>`;
                 }
