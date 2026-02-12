@@ -108,6 +108,9 @@ img{
 .rowDial > img{
     flex: 0 0 auto;
 }
+.rowDial {
+    font-size: 32px;
+}
 
 
 .columnContainer{
@@ -210,11 +213,13 @@ img{
     margin: 0px;
     padding: 0px 0px 0px 16px;
     width: 100%;
-    font-size: 48px;
     text-align: left;
     align-items: center;
     justify-content: center;
     color: #463f3a;
+}
+.categoryTitle > h2{
+    font-size: 64px;
 }
 
 pre{
