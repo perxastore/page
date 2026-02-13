@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="./images/logo.png">
     <meta charset="UTF-8" />
     <title>Perxa - Articulo</title>
 </head>
@@ -32,6 +33,15 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        const configRef = doc(db, "configs", "global");
+        let globalDiscount = 1;
+        onSnapshot(configRef, (snap) => {
+        if (snap.exists()) {
+            console.log("Updated config:", snap.data());
+            globalDiscount = snap.data().globalDiscount;
+        }
+        });
+
         const params = new URLSearchParams(window.location.search);
         const itemId = params.get('id');
         
@@ -44,7 +54,11 @@
             /*document.getElementById("name").textContent = "Nombre: " + item.name;*/
             document.getElementById("size").textContent = item.size;
             document.getElementById("color").textContent = item.color;
-            document.getElementById("price").textContent = `Q${item.price}`;
+            if (globalDiscount<1){
+                document.getElementById("price").innerHTML = `<s>Q${item.price}</s> Q${item.price * globalDiscount}`;
+            }else if (globalDiscount == 1){
+                document.getElementById("price").textContent = `Q${item.price}`;
+            }
             document.getElementById("description").innerHTML = item.description;
 
             const gallery = document.getElementById("gallery");

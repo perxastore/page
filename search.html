@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="./images/logo.png">
     <meta charset="UTF-8" />
     <title>Perxa - Prendas</title>
 </head>
@@ -31,6 +32,15 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        
+        const configRef = doc(db, "configs", "global");
+        let globalDiscount = 1;
+        onSnapshot(configRef, (snap) => {
+        if (snap.exists()) {
+            console.log("Updated config:", snap.data());
+            globalDiscount = snap.data().globalDiscount;
+        }
+        });
         
         const params = new URLSearchParams(window.location.search);
 
@@ -64,13 +74,17 @@
                 const item = doc.data();
                 if (item.status != "Vendido"){
                     const img = item.images?.[0] || "";
+                    let priceHTML = "";
+                    if (globalDiscount<1){
+                        priceHTML = `<h2 style="font-size: 48px"><s>Q${item.price}</s> Q${item.price * globalDiscount}</h2>`;
+                    }else if (globalDiscount == 1){
+                        priceHTML = `<h2 style="font-size: 48px">Q${item.price}</h2>`;
+                    }
                     galleryDiv.innerHTML += `
                     <div class="card" onclick="window.location.href='./item.html?id=${doc.id}'">
                         <h5>${item.id}</h5>
                         <img src="${img}" loading="lazy">
-                        
-                        <h2>Q${item.price}</h2>
-
+                        ${priceHTML}
                         <h2>Talla ${item.size}</h2>
                     </div>`;
                 }

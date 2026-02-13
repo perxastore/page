@@ -161,8 +161,9 @@ img{
 }
 
 .homeBanner{
+
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     overflow: hidden;
     justify-content:space-around;
     align-items: center;
@@ -170,6 +171,7 @@ img{
     background-color: #524632;
     border-radius: 32px;
     height: 450px;
+    gap: 0px;
     padding: 32px;
     margin: 16px;
 }
@@ -179,25 +181,32 @@ img{
     list-style: none;
     list-style-type: none;
     font-size: 132px;
-    margin: 8px;
+    margin: 0px;
     padding: 0px;
 }
-.homeBanner h2,h3{
+.homeBanner > h2, .homeBanner> h3{
     flex: 0 0 auto;
     text-align: center;
+    justify-self: center;
     list-style: none;
     list-style-type: none;
     font-size: 48px;
-    margin: 8px;
+    margin: 0px;
     padding: 0px;
+
 }
+
+.homeBanner> h3{
+    font-size: 32px;
+}
+
 .homeBanner img{
-    flex: 0.5 0 auto;
+    flex: 0 0 auto;
     object-fit: cover;
     overflow: hidden;
-    height: 380px;
-    width: 128px;
-    border-radius: 16px;
+    height: 400px;
+    width: 400px;
+    border-radius: 32px;
 }
 
 
@@ -287,3 +296,7 @@ button:active{
     border-radius: 0px;
 }
 
+hr{
+    width: 80%;
+    margin: 20px;
+}
